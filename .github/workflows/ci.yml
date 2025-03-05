@@ -22,7 +22,7 @@ jobs:
       - name: Run Python Script with Modified Files
         run: |
           if [ -n "$FILES" ]; then
-            poetry run python listfiles.py $FILES
+            python listfiles.py $FILES
           else
             echo "No modified files in config/ folder. Skipping script execution."
           fi
