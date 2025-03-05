@@ -9,17 +9,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Get Modified Files in ABC Folder
+      - name: Get Modified Files in config Folder
         id: changed_files
         run: |
-          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD -- abc/)
+          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD -- config/)
           echo "Modified files: $MODIFIED_FILES"
           echo "FILES=$MODIFIED_FILES" >> $GITHUB_ENV
 
       - name: Run Python Script with Modified Files
         run: |
           if [ -n "$FILES" ]; then
-            poetry run python app.py $FILES
+            poetry run python test.py $FILES
           else
-            echo "No modified files in abc/ folder. Skipping script execution."
+            echo "No modified files in config/ folder. Skipping script execution."
           fi
