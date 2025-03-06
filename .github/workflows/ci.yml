@@ -48,5 +48,3 @@ jobs:
           python listfiles.py
         env:
           files: ${{ env.files }}
-
-
