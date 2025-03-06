@@ -47,4 +47,4 @@ jobs:
         run:| 
           python listfiles.py
         env:
-          files: ${{ env.files }}
+          FILES: ${{ env.FILES }}
