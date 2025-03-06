@@ -1,10 +1,3 @@
-name: Get Modified Files on Merge to main
-
-on:
-  push:
-    branches:
-      - main  # Runs when code is merged into 'main'
-
 jobs:
   get-modified-files:
     runs-on: ubuntu-latest
@@ -25,17 +18,21 @@ jobs:
           MODIFIED_FILES=$(git diff --name-only $BASE_SHA HEAD)
           echo "Modified files:"
           echo "$MODIFIED_FILES"
-          # Store files safely in GITHUB_ENV
-          {
-            echo "FILES<<EOF"
-            echo "$MODIFIED_FILES"
-            echo "EOF"
-          } >> "$GITHUB_ENV"
+
+          # Store all modified files in GITHUB_ENV
+          echo "FILES=$MODIFIED_FILES" >> "$GITHUB_ENV"
+
+          # Filter and store only config files in GITHUB_ENV
+          CONFIG_FILES=$(echo "$MODIFIED_FILES" | grep '^config/' || true)
+          echo "CONFIG_FILES=$CONFIG_FILES" >> "$GITHUB_ENV"
 
       - name: Process Modified Files
         run: |
           echo "Files changed in this merge:"
-          echo "$FILES"
+          echo "$FILES"  # Optional: prints all modified files for debugging
+          echo "Config files changed in this merge:"
+          echo "$CONFIG_FILES"  # Prints only files inside 'config/'
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -44,6 +41,5 @@ jobs:
       - name: Install Python Dependencies
         run: python -m pip install --upgrade pip
 
-      - name: Run Python Script with Modified Files
+      - name: Run Python Script with Modified Config Files
         run: python listfiles.py "$CONFIG_FILES"
-
