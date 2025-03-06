@@ -1,9 +1,9 @@
-name: Get Modified Files on Merge to Develop
+name: Get Modified Files on Merge to main
 
 on:
   push:
     branches:
-      - develop  # Runs when code is merged into 'develop'
+      - main  # Runs when code is merged into 'main'
 
 jobs:
   get-modified-files:
