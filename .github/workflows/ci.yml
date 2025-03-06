@@ -23,17 +23,15 @@ jobs:
         id: modified_files
         run: |
           MODIFIED_FILES=$(git diff --name-only $BASE_SHA HEAD)
-          echo "Modified files:"
-          echo "$MODIFIED_FILES"
-
-          # Store all modified files in GITHUB_ENV
-          echo "FILES=$MODIFIED_FILES" >> "$GITHUB_ENV"
+          echo "MODIFIED_FILES<<EOF" >> "$GITHUB_ENV"
+          echo "$MODIFIED_FILES" >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"
 
 
       - name: Process Modified Files
         run: |
           echo "Files changed in this merge:"
-          echo "$FILES"
+          echo "$MODIFIED_FILES"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -47,4 +45,4 @@ jobs:
         run:
           python listfiles.py
         env:
-          FILES: ${{ env.FILES }}
+          MODIFIED_FILES: ${{ env.MODIFIED_FILES }}

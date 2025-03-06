@@ -5,7 +5,7 @@ def process_file(file_path):
     print(f"Processing file: {file_path}")
 
 if __name__ == "__main__":
-    files = os.getenv("FILES")  # Get files passed from GitHub Actions
+    files = os.getenv("MODIFIED_FILES")  # Get files passed from GitHub Actions
 
     if not files:
         print("No modified files provided.")
