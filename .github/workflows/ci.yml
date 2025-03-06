@@ -36,3 +36,14 @@ jobs:
         run: |
           echo "Files changed in this merge:"
           echo "$FILES"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: python -m pip install --upgrade pip
+
+      - name: Run Python Script with Modified Files
+        run: python app.py "$CONFIG_FILES"
+
