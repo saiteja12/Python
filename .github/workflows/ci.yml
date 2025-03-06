@@ -22,16 +22,11 @@ jobs:
           # Store all modified files in GITHUB_ENV
           echo "FILES=$MODIFIED_FILES" >> "$GITHUB_ENV"
 
-          # Filter and store only config files in GITHUB_ENV
-          CONFIG_FILES=$(echo "$MODIFIED_FILES" | grep '^config/' || true)
-          echo "CONFIG_FILES=$CONFIG_FILES" >> "$GITHUB_ENV"
 
       - name: Process Modified Files
         run: |
           echo "Files changed in this merge:"
-          echo "$FILES"  # Optional: prints all modified files for debugging
-          echo "Config files changed in this merge:"
-          echo "$CONFIG_FILES"  # Prints only files inside 'config/'
+          echo "$FILES"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -41,5 +36,5 @@ jobs:
       - name: Install Python Dependencies
         run: python -m pip install --upgrade pip
 
-      - name: Run Python Script with Modified Config Files
-        run: python listfiles.py "$CONFIG_FILES"
+      - name: Run Python Script with Modified Files
+        run: python listfiles.py "$FILES"
