@@ -25,7 +25,12 @@ jobs:
           MODIFIED_FILES=$(git diff --name-only $BASE_SHA HEAD)
           echo "Modified files:"
           echo "$MODIFIED_FILES"
-          echo "FILES=$MODIFIED_FILES" >> $GITHUB_ENV
+          # Store files safely in GITHUB_ENV
+          {
+            echo "FILES<<EOF"
+            echo "$MODIFIED_FILES"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
 
       - name: Process Modified Files
         run: |
