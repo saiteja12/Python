@@ -1,3 +1,10 @@
+name: Get Modified Config Files and Run Python Script
+
+on:
+  push:
+    branches:
+      - develop  # Runs when changes are merged into 'develop'
+
 jobs:
   get-modified-files:
     runs-on: ubuntu-latest
