@@ -3,7 +3,7 @@ name: Get Modified Config Files and Run Python Script
 on:
   push:
     branches:
-      - develop  # Runs when changes are merged into 'develop'
+      - main  # Runs when changes are merged into 'main'
 
 jobs:
   get-modified-files:
