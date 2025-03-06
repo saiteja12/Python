@@ -1,0 +1,33 @@
+name: Detect Modified Config Files on Merge to Develop
+
+on:
+  push:
+    branches:
+      - main  # Runs only when code is merged into 'develop'
+
+jobs:
+  check-modified-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch full history to detect all changes
+
+      - name: Get Merge Base (Last Common Commit in main)
+        id: merge_base
+        run: echo "BASE_SHA=$(git merge-base HEAD origin/main)" >> $GITHUB_ENV
+
+      - name: Get Modified Files in `config/`
+        id: modified_files
+        run: |
+          MODIFIED_FILES=$(git diff --name-only $BASE_SHA HEAD | grep '^config/' || true)
+          echo "Modified files: $MODIFIED_FILES"
+          echo "FILES=$MODIFIED_FILES" >> $GITHUB_ENV
+
+      - name: Process Modified Files
+        if: env.FILES != ''
+        run: |
+          echo "The following config files were modified:"
+          echo "$FILES"
