@@ -8,7 +8,7 @@
    "outputs": [
     {
      "name": "stdout",
-     "output_type": "stream",
+     "output_type": "stream1",
      "text": [
       "Hi, this is saiteja and he is gopi\n"
      ]
