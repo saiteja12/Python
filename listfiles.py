@@ -1,10 +1,13 @@
+import os
 import sys
 
 def process_file(file_path):
     print(f"Processing file: {file_path}")
 
 if __name__ == "__main__":
-    files = sys.argv[1:]  # Get files passed from GitHub Actions
+    files = os.getenv("MODIFIED_FILES").split('\n')  # Get files passed from GitHub Actions
+    print('executing')
+    print(files)
 
     if not files:
         print("No modified files provided.")

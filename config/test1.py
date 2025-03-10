@@ -4,6 +4,7 @@
    "cell_type": "code",
    "execution_count": null,
    "metadata": {},
+   "test":{}
    "outputs": [
     {
      "name": "stdout",
@@ -14,7 +15,7 @@
     }
    ],
    "source": [
-    "print(\"Hi, this is %s and he is %s\"%('saiteja','gopi'))"
+    "# print(\"Hi, this is %s and he is %s\"%('saiteja','gopi'))"
    ]
   },
   {
