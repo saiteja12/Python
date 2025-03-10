@@ -15,9 +15,11 @@ jobs:
         with:
           fetch-depth: 0  # Fetch full history to compare changes
 
-      - name: Get Last Commit Before Merge
-        id: previous_commit
-        run: echo "BASE_SHA=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
+      - name: Get Base Commit
+        id: base_commit
+        run: |
+          BASE_SHA=$(git merge-base origin/main HEAD)
+          echo "BASE_SHA=$BASE_SHA" >> $GITHUB_ENV
 
       - name: Get Modified Files
         id: modified_files
@@ -26,7 +28,6 @@ jobs:
           echo "MODIFIED_FILES<<EOF" >> "$GITHUB_ENV"
           echo "$MODIFIED_FILES" >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
-
 
       - name: Process Modified Files
         run: |

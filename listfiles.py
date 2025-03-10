@@ -6,6 +6,7 @@ def process_file(file_path):
 
 if __name__ == "__main__":
     files = os.getenv("MODIFIED_FILES").split('\n')  # Get files passed from GitHub Actions
+    print('executing')
     print(files)
 
     if not files:
