@@ -23,7 +23,7 @@ jobs:
 
       - name: Set DRY_RUN for pull_request
         id: dry_run
-        run : echo "DRY_RUN = ${{ github.event_name == 'pull_request' && 'true' || 'false' }}" >> GITHUB_ENV
+        run : echo "DRY_RUN = ${{ github.event_name == 'pull_request' && 'true' || 'false' }}" >> $GITHUB_ENV
         
       - name: Get Modified Files
         id: modified_files
