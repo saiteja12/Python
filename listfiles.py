@@ -6,6 +6,13 @@ def process_file(file_path):
 
 if __name__ == "__main__":
     files = os.getenv("MODIFIED_FILES").split('\n')  # Get files passed from GitHub Actions
+    DRY_RUN = os.getenv("DRY_RUN")
+    print('DRY_RUN')
+    print(DRY_RUN)
+    if DRY_RUN == 'true':
+        print('DRY_RUN is set')
+    else:
+        print('Not set')
     print('executing')
     print(files)
 
