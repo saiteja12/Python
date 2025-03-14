@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Runs when changes are merged into 'main'
+    pull_request:
+      - main
 
 jobs:
   get-modified-files:
