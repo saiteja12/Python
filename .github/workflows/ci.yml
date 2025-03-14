@@ -21,9 +21,9 @@ jobs:
         id: previous_commit
         run: echo "BASE_SHA=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
 
-            - name: set DRY_RUN on PR_Test
-              if: ${{ github.event_name == 'pull_request' }}
-              run: echo "DRY_RUN=true" >> $GITHUB_ENV
+      - name: set DRY_RUN on PR_Test
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "DRY_RUN=true" >> $GITHUB_ENV
           
       - name: Get Modified Files
         id: modified_files
