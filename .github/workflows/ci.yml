@@ -37,7 +37,8 @@ jobs:
         run: |
           echo "Files changed in this merge:"
           echo "$MODIFIED_FILES"
-          echo "DRY_RUN set to: $DRY_RUN "
+          echo "DRY_RUN set to:"
+          echo "$DRY_RUN"
 
       - name: Set up Python
         uses: actions/setup-python@v5
