@@ -20,6 +20,10 @@ jobs:
         id: previous_commit
         run: echo "BASE_SHA=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
 
+      - name: Set DRY_RUN for pull_request
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "DRY_RUN=true" >> $GITHUB_ENV
+        
       - name: Get Modified Files
         id: modified_files
         run: |
@@ -32,6 +36,8 @@ jobs:
         run: |
           echo "Files changed in this merge:"
           echo "$MODIFIED_FILES"
+          echo "DRY_RUN set to: "
+          echo "$DRY_RUN"
 
       - name: Set up Python
         uses: actions/setup-python@v5
